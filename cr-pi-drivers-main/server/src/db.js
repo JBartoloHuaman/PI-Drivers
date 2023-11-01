@@ -28,8 +28,9 @@ let entries = Object.entries(sequelize.models);
 let capsEntries = entries.map((entry) => [entry[0][0].toUpperCase() + entry[0].slice(1), entry[1]]);
 sequelize.models = Object.fromEntries(capsEntries);
 
-const { Driver } = sequelize.models;
-
+const { Driver, Team } = sequelize.models;
+Driver.belongsToMany(Team,{through:"Driver_Team", timestamps:false});
+Team.belongsToMany(Driver,{through:"Driver_Team", timestamps:false});
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
 

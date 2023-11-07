@@ -44,6 +44,7 @@ const getDriversDB = async () => {
             description : driver.description,
             image       : driver.image,
             nacionality : driver.nacionality,
+            birthdate   : driver.birthdate,
             Teams       : driver.Teams.map(team => team.name)
         }
     })

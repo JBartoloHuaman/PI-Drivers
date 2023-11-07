@@ -16,6 +16,7 @@ export default function Nav() {
     const handleButton = (event) => {
         event.preventDefault();
         dispatch(SearchDriver(input))
+        document.getElementById("search").value = "";
     }
 
     const Refresh = () => {
@@ -39,7 +40,7 @@ export default function Nav() {
                     <section>
                         <form autoComplete="off">
                             <div>
-                                <input onChange={handleInput} type="text" name="q" placeholder="Buscar..."/>
+                                <input onChange={handleInput} type="text" id="search" placeholder="Buscar..."/>
                                     <button onClick={handleButton}>Buscar</button>
                             </div>
 

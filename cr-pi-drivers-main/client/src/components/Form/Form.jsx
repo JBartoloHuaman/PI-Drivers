@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import "./form.css";
 import { useDispatch, useSelector } from 'react-redux';
-import { getTeams } from '../../redux/actions/actions';
+import { createDriver, getTeams } from '../../redux/actions/actions';
 import validation from "../../validation";
 
 function Form() {
@@ -17,7 +17,7 @@ function Form() {
   const [form,setForm] = useState({
     name:"",
     lastname:"",
-    nationality:"",
+    nacionality:"",
     birthdate:"",
     teams:[],
     image:"",
@@ -69,6 +69,8 @@ function Form() {
   const handleSubmit = (event) => {
     event.preventDefault();
     if(Object.keys(errors).length) return alert("Faltan completar algunos datos")
+    dispatch(createDriver(form))
+    alert("driver is created")
     console.log(event);
   }
   
@@ -92,7 +94,7 @@ function Form() {
         </label>
 
         <label >Nationality:
-        <input onChange={handleInput} value={form.nationality} type="text" name="nationality" placeholder='Write...'/>
+        <input onChange={handleInput} value={form.nationality} type="text" name="nacionality" placeholder='Write...'/>
         <div className='error-cont'>{errors.nationality}</div>
         </label>
 

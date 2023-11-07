@@ -1,4 +1,4 @@
-import { FILTER_TEAM, GET_DRIVERS, GET_DRIVER_ID, GET_TEAMS, PAGINATION, REFRESH, SEARCH_DRIVER } from "../actions/actions-types";
+import { FILTER_ORDER, FILTER_ORIGIN, FILTER_TEAM, GET_DRIVERS, GET_DRIVER_ID, GET_TEAMS, PAGINATION, REFRESH, SEARCH_DRIVER } from "../actions/actions-types";
 
 
 const initialState = {
@@ -48,12 +48,40 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 drivers: [...action.payload].splice(0,items_Page),
-                driversBackUp: action.payload
+                // driversBackUp: action.payload
             }
         case FILTER_TEAM:
+            if(action.payload==="------") return {...state}
             return {
                 ...state,
                 drivers: [...state.driversBackUp].filter(driver => driver.Teams?.includes(action.payload)).splice(0,items_Page),
+            }
+        case FILTER_ORDER:
+            if(action.payload==="------") return {...state}
+            if(action.payload==="asc"){
+                return {
+                    ...state,
+                    drivers: [...state.driversBackUp].sort((a,b) => new Date(a.birthdate) - new Date(b.birthdate)).splice(0,items_Page)
+                }
+            }
+            if(action.payload==="asc"){
+                return {
+                    ...state,
+                    drivers: [...state.driversBackUp].sort((a,b) => new Date(b.birthdate) - new Date(a.birthdate)).splice(0,items_Page)
+                }
+            }
+        case FILTER_ORIGIN:
+            if(action.payload === "api"){
+                return {
+                    ...state, 
+                    drivers: [...state.driversBackUp].filter(driver => !isNaN(driver.id)).splice(0,items_Page)
+                }
+            }
+            if(action.payload === "created"){
+                return {
+                    ...state,
+                    drivers: [...state.driversBackUp].filter(driver => isNaN(driver.id)).splice(0,items_Page)
+                }
             }
         case REFRESH:
             return {

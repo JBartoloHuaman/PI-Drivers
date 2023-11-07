@@ -1,4 +1,4 @@
-import { GET_DRIVERS, GET_TEAMS, GET_DRIVER_ID, PAGINATION, SEARCH_DRIVER, FILTER_TEAM, REFRESH } from "./actions-types";
+import { GET_DRIVERS, GET_TEAMS, GET_DRIVER_ID, PAGINATION, SEARCH_DRIVER, FILTER_TEAM, REFRESH, FILTER_ORDER, FILTER_ORIGIN } from "./actions-types";
 import axios from "axios";
 
 const URL_DRIVERS = "http://localhost:3001/drivers";
@@ -68,7 +68,7 @@ export const SearchDriver = (name) => {
                 payload:data
             });
         } catch (error) {
-            console.log(error);
+            alert(error.response.data.error);
         }
     }
 }
@@ -86,12 +86,49 @@ export const filterTeam = (team) => {
     }
 }
 
+export const filterOrder = (order) => {
+    return async (dispatch) => {
+        try {
+            return dispatch({
+                type:FILTER_ORDER,
+                payload:order
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}
+
+export const filterOrigin = (origin) => {
+    return async (dispatch) => {
+        try {
+            return dispatch({
+                type:FILTER_ORIGIN,
+                payload: origin
+            })
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}
+
 export const refresh = () => {
     return async (dispatch) => {
         try {
             return dispatch({
                 type:REFRESH
             });
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}
+
+
+export const createDriver = (form) => {
+    return async (dispatch) => {
+        try {
+            await axios.post(URL_DRIVERS,form)
         } catch (error) {
             console.log(error);
         }

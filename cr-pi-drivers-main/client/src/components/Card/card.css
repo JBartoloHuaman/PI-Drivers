@@ -1,0 +1,19 @@
+.card-cont{
+    background-color: #f4f0e5;
+    color: #430301;
+    border-radius: 35px;
+    box-shadow: 4px 5px 18px red;
+}
+
+.card-img{
+    object-fit: cover;
+    height: 350px;
+    
+}
+.card-button{
+    text-decoration: none;
+    color: #430301;
+    
+
+}
+

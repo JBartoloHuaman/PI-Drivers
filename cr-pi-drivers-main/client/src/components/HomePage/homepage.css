@@ -1,0 +1,29 @@
+.home-container {
+    display: flex;
+    align-items: stretch;
+}
+.home-button1{
+    width: 5%;
+    background-color: rgba(255, 0, 0, 0.526);
+}
+.home-button2{
+    width: 90%;
+}
+.home-button3{
+    width: 5%;
+    background-color: rgba(255, 0, 0, 0.526);
+}
+
+gap: 50px;
+    padding: 60px 50px;
+/* .home-button1{
+    flex-grow:1
+}
+
+.home-button2{
+    flex-grow: 30
+}
+
+.home-button3{
+    flex-grow: 1
+} */

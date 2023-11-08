@@ -1,4 +1,4 @@
-import { GET_DRIVERS, GET_TEAMS, GET_DRIVER_ID, PAGINATION, SEARCH_DRIVER, FILTER_TEAM, REFRESH, FILTER_ORDER, FILTER_ORIGIN } from "./actions-types";
+import { GET_DRIVERS, GET_TEAMS, GET_DRIVER_ID, PAGINATION, SEARCH_DRIVER, FILTER_TEAM, REFRESH, FILTER_ORDER, FILTER_ORIGIN, CLEAN_DETAIL } from "./actions-types";
 import axios from "axios";
 
 const URL_DRIVERS = "http://localhost:3001/drivers";
@@ -124,11 +124,22 @@ export const refresh = () => {
     }
 }
 
-
 export const createDriver = (form) => {
-    return async (dispatch) => {
+    return async () => {
         try {
             await axios.post(URL_DRIVERS,form)
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}
+
+export const cleanDriverDetail = () => {
+    return async (dispatch) => {
+        try {
+            return dispatch({
+                type:CLEAN_DETAIL
+            })
         } catch (error) {
             console.log(error);
         }

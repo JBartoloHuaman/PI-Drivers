@@ -1,0 +1,21 @@
+
+.landing-cont{
+    height: 100vh;
+    background-image: url("../../img/portada.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    /* margin-top: -34.3px; */
+}
+
+.title-cont{
+    text-align: center;
+    padding-top: 15%;
+}
+.title{
+    font-weight: bold;
+    text-shadow: 5px 5px 10px white;
+    -webkit-text-stroke: 1px rgba(0, 0, 0, 0.655);
+    padding-bottom: 25px;
+    font-size: 5rem;
+}

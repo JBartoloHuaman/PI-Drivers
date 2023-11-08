@@ -1,5 +1,10 @@
 
 
+.nav-cont{
+	box-shadow: 0px 2px 8px;
+
+}
+
 .container{
     margin: auto;
     list-style: none;

@@ -1,17 +1,17 @@
 import { useEffect, useState } from 'react'
-import "./form.css";
 import { useDispatch, useSelector } from 'react-redux';
 import { createDriver, getTeams } from '../../redux/actions/actions';
 import validation from "../../validation";
+import "./form.css";
 
 function Form() {
 
   const dispatch = useDispatch();
   const teams = useSelector(state => state.teams);
+  const drivers = useSelector(state => state.drivers)
   
   useEffect(() => {
     dispatch(getTeams())
-    console.log(teams);
   },[])
   
   const [form,setForm] = useState({
@@ -19,7 +19,7 @@ function Form() {
     lastname:"",
     nacionality:"",
     birthdate:"",
-    teams:[],
+    Teams:[],
     image:"",
     description:"",
   })
@@ -31,13 +31,15 @@ function Form() {
 
   const handleInput = (event) =>{
     if(event.target.name === "teams"){
+      if(event.target.value !== "------"){
       setTeam([...team,event.target.value])
       setForm((prev) =>{
         return {
           ...prev,
-          teams: [...prev.teams,event.target.value]
+          Teams: [...prev.Teams,event.target.value]
         }
       })
+    }
     }
     if(event.target.name !== "teams"){
       setForm({
@@ -56,9 +58,10 @@ function Form() {
   const addTeam = (event) =>{
     event.preventDefault()
     setInputTeam([...inputTeam,
-    <div key={cont}>
+    <div className='form-label' key={cont}>
           <label htmlFor="teams">Teams:</label>
           <select onChange={handleInput} name="teams" id="teams">
+            <option value="------">------</option>
             {teams.map((team,index) => <option key={index} value={team}>{team}</option>)}
           </select>
         </div>
@@ -68,66 +71,82 @@ function Form() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if(Object.keys(errors).length) return alert("Faltan completar algunos datos")
+    document.getElementById("teams").value = "------";
+    const driversRepeat = drivers.find(driver=> driver.name.toLowerCase() === form.name.toLowerCase() && driver.lastname.toLowerCase() === form.lastname.toLowerCase())
+    for(const key in form){
+      if(form[key] ==="") return alert("Faltan completar algunos datos")
+    }
+    // if(Object.keys(errors).length) return alert("Faltan completar algunos datos")
+    if(driversRepeat) return alert("The driver is already registered")
     dispatch(createDriver(form))
     alert("driver is created")
-    console.log(event);
+    setInputTeam([])
+    setForm({
+      name:"",
+      lastname:"",
+      nacionality:"",
+      birthdate:"",
+      Teams:[],
+      image:"",
+      description:"",
+    })
+
   }
-  
 
   return (
-    <div>
+    <div className='form-cont'>
     <h2>Creating Drive</h2>
     <form onSubmit={handleSubmit}>
 
       <fieldset>
-        <legend >Driver Information</legend>
+        <legend ><h3>Driver Information</h3></legend>
 
-        <label >Name:
+        <label className='form-label'>Name:
         <input onChange={handleInput} value={form.name} type="text" name="name" placeholder='Write...'/>
         <div className='error-cont'>{errors.name}</div>
         </label>
 
-        <label >Lastname:
+        <label className='form-label' >Lastname:
         <input onChange={handleInput} value={form.lastname} type="text" name="lastname" placeholder='Write...'/>
         <div className='error-cont'>{errors.lastname}</div>
         </label>
 
-        <label >Nationality:
-        <input onChange={handleInput} value={form.nationality} type="text" name="nacionality" placeholder='Write...'/>
+        <label className='form-label' >Nationality:
+        <input onChange={handleInput} value={form.nacionality} type="text" name="nacionality" placeholder='Write...'/>
         <div className='error-cont'>{errors.nationality}</div>
         </label>
 
-        <label>Birthdate:
-        <input onChange={handleInput} value={form.fecha} type="date" name="birthdate" id="birthdate" placeholder='Write...'/> 
+        <label className='form-label'>Birthdate:
+        <input onChange={handleInput} value={form.birthdate} type="date" name="birthdate" id="birthdate" placeholder='Write...'/> 
         <div className='error-cont'>{errors.birthdate}</div>
         </label>
       </fieldset>
 
       <fieldset>
-        <legend>Additional Information</legend>
+        <legend><h3>Additional Information</h3></legend>
 
-        <div>
+        <div className='form-label'>
           <label htmlFor="teams">Teams:</label>
           <select onChange={handleInput} name="teams" id="teams">
-            {teams.map((team,index) => <option key={index} value={team}>{team}</option>)}
+            <option value="------">------</option>
+            {teams?.map((team,index) => <option key={index} value={team}>{team}</option>)}
           </select>
         </div>
         {inputTeam.length ? inputTeam.map((e)=>e) : null}
-          <button onClick={addTeam}>+</button>
+          <button onClick={addTeam} className='form-button'>+</button>
 
-        <label>Image:
+        <label className='form-label'>Image:
           <input onChange={handleInput} value={form.image} name='image' type="text" placeholder='link...'/>
           <div className='error-cont'>{errors.image}</div>
         </label>
 
-        <label>Description:
+        <label className='form-label'>Description: <br />
           <textarea onChange={handleInput} value={form.description} name="description" cols="30" rows="10" placeholder='Write...'></textarea>
           <div className='error-cont'>{errors.description}</div>
         </label>
       </fieldset>
 
-      <button type="submit" >Register</button>
+      <button type="submit" className='form-submit'>Register</button>
     </form>
     </div>
   )

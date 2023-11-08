@@ -14,8 +14,33 @@
     background-color: rgba(255, 0, 0, 0.526);
 }
 
-gap: 50px;
-    padding: 60px 50px;
+.home-page{
+    text-align: center;  
+}
+
+
+.home-page h3{
+    font-size: 1.3rem;
+    text-shadow: 2px 4px 20px white;
+}
+
+.home-filter{
+    position: absolute;
+    display: inline-block;
+    width: 100%;
+}
+.filters{
+    /* position: absolute; */
+    width: 100%;
+    margin: 0 25%  ;
+}
+
+.select{
+    margin-right: 40px;
+}
+
+
+
 /* .home-button1{
     flex-grow:1
 }

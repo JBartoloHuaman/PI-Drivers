@@ -5,10 +5,10 @@ const axios = require("axios");
 const createDriver = async ({
     name,lastname,description,
     image,nacionality,birthdate,
-    teams
+    Teams
 }) => {
     if(!name || !lastname || !description || !image 
-        || !nacionality || !birthdate || !teams) throw Error("Missing data")
+        || !nacionality || !birthdate || !Teams) throw Error("Missing data")
 
     const newDriver = await Driver.create({
         name,lastname,description,
@@ -18,7 +18,7 @@ const createDriver = async ({
     const teamsDB = await Team.findAll({
         where: {
             name:{
-                [Sequelize.Op.in]: teams
+                [Sequelize.Op.in]: Teams
             }
         }
     });
@@ -59,7 +59,7 @@ const getDriversApi = async () => {
             name        : driver.name.forename,
             lastname    : driver.name.surname,
             description : driver.description,
-            image       : driver.image.url,
+            image       : driver.image.url.length ? driver.image.url : "https://img.freepik.com/vector-premium/coche-corredor-dibujos-animados_74102-1526.jpg",
             nacionality : driver.nationality,
             birthdate   : driver.dob,
             Teams       : driver.teams?.split(/\s*,\s*/)
@@ -86,9 +86,10 @@ const getDrivers = async (name) => {
 
 const getDriverById = async (id) => {
     if(isNaN(id)){
-        const driver = await Driver.findByPk(id);
-        if(!driver)  throw Error("the driver was not found");
-        return driver;
+        const drivers = await getDrivers();
+        const driverFound = drivers.find(driver => driver.id===id)
+        if(!driverFound)  throw Error("the driver was not found");
+        return driverFound;
     }
     const drivers = await getDriversApi();
     const driverFound = drivers.find(driver => driver.id == id)

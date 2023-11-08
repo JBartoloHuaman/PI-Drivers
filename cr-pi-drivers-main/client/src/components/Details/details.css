@@ -1,0 +1,23 @@
+.detail-img{
+    height: 50vh;
+    width: auto;
+    padding-left: 50px;
+    padding-top: 50px;
+}
+
+.detail-cont{
+    color: rgb(39, 35, 35);
+    display: flex;
+    margin: 80px 200px;
+    padding: 50px 50px;
+    background-image: url("https://image.slidesdocs.com/responsive-images/background/business-card-information-minimalistic-abstract-geometric-powerpoint-background_bab7b86ec3__960_540.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 50px;
+}
+
+.detail-driver{
+    width: 50vw;
+    padding-top: 50px;
+    padding-left: 20px;
+}

@@ -28,7 +28,9 @@ export default function Nav() {
         <nav className="nav-cont">
             <ul className="container">
                 <li className="li-img">
+                    <Link to="/" >
                     <img src="http://127.0.0.1:5500/cr-pi-drivers-main/client/src/img/F1.svg" alt="" />
+                    </Link>               
                 </li>
                 <li>
                     <Link onClick={Refresh} to="/home" className="home">Home</Link>

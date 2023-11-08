@@ -3,12 +3,13 @@
     color: #430301;
     border-radius: 35px;
     box-shadow: 4px 5px 18px red;
+    text-align: center;
 }
 
 .card-img{
     object-fit: cover;
-    height: 350px;
-    
+    width: 280px;
+    height: 430px;    
 }
 .card-button{
     text-decoration: none;

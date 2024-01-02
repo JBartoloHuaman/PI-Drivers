@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { createDriver, getTeams } from '../../redux/actions/actions';
 import validation from "../../validation";
+import Card from "../Card/Card";
 import "./form.css";
 
 function Form() {
@@ -95,8 +96,8 @@ function Form() {
 
   return (
     <div className='form-cont'>
-    <h2>Creating Drive</h2>
     <form onSubmit={handleSubmit}>
+    <h2>Creating Drive</h2>
 
       <fieldset>
         <legend ><h3>Driver Information</h3></legend>
@@ -148,6 +149,7 @@ function Form() {
 
       <button type="submit" className='form-submit'>Register</button>
     </form>
+    <Card className="form-card" name={form.name} image={form.image} Teams={form.Teams}/>
     </div>
   )
 }

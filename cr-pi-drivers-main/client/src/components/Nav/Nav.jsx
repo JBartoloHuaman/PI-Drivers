@@ -2,6 +2,7 @@ import { Link } from "react-router-dom"
 import { useState } from "react"
 import { useDispatch } from "react-redux";
 import { SearchDriver, refresh } from "../../redux/actions/actions";
+import logo from '../../assets/logo.svg'
 import "./Nav.css"
 
 export default function Nav() {
@@ -29,7 +30,7 @@ export default function Nav() {
             <ul className="container">
                 <li className="li-img">
                     <Link to="/" >
-                    <img src="http://127.0.0.1:5500/cr-pi-drivers-main/client/src/img/F1.svg" alt="" />
+                    <img src={logo} alt="" />
                     </Link>               
                 </li>
                 <li>

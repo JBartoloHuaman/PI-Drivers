@@ -12,6 +12,8 @@
     background: #092327;
     width: 100vw;
     min-width: 1000px;
+	display: flex;
+    align-items: center;
 
 }
 

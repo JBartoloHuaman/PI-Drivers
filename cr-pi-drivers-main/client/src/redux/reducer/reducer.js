@@ -52,14 +52,14 @@ const reducer = (state = initialState, action) => {
             if(action.payload==="------") return {...state, drivers:[...state.driversBackUp].splice(0,items_Page)}
             return {
                 ...state,
-                drivers: [...state.driversBackUp].filter(driver => driver.Teams?.includes(action.payload)).splice(0,items_Page),
+                drivers: [...state.driversBackUp].filter(driver => driver.Teams?.includes(action.payload)).splice(0,items_Page)    
             }
         case FILTER_ORDER:
             if(action.payload==="------") return {...state,drivers:[...state.driversBackUp].splice(0,items_Page)}
             if(action.payload==="asc"){
                 return {
                     ...state,
-                    drivers: [...state.driversBackUp].sort((a,b) => new Date(a.birthdate) - new Date(b.birthdate)).splice(0,items_Page)
+                    drivers: [...state.driversBackUp].sort((a,b) => new Date(a.birthdate) - new Date(b.birthdate)).splice(0,items_Page) 
                 }
             }
             if(action.payload==="desc"){
@@ -73,7 +73,7 @@ const reducer = (state = initialState, action) => {
             if(action.payload === "api"){
                 return {
                     ...state, 
-                    drivers: [...state.driversBackUp].filter(driver => !isNaN(driver.id)).splice(0,items_Page)
+                    drivers: [...state.driversBackUp].filter(driver => !isNaN(driver.id)).splice(0,items_Page),
                 }
             }
             if(action.payload === "created"){

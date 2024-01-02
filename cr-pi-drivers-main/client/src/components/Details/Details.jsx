@@ -24,7 +24,7 @@ function Details() {
         <h3>NATIONALITY: {driverDetail?.nacionality}</h3>
         <h3>BIRTHDATE: {driverDetail?.birthdate}</h3>
         <h3>DESCRIPTION: {driverDetail?.description}</h3>
-        <h3>TEAMS: {driverDetail?.Teams}</h3>
+        <h3>TEAMS: {driverDetail?.Teams?.join(", ")}</h3>
       </div>
       <div>
         <img className='detail-img' src={driverDetail?.image} alt={driverDetail?.name} />
